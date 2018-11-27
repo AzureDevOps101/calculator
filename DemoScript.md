@@ -11,4 +11,7 @@
     2. npm run build
     3. npm test
 8. trigger manually
-9. Enable CI on master branch
+9. change api/controllers/arithmeticControllers.js adding function to trigger a test faliure
+10. Trigger manullay and show the test failed log
+11. Add another step to "Publish Test Results", make sure step "npm test" has "continue on err"
+12. Show build Summary and Test Tab
