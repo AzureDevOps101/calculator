@@ -28,3 +28,15 @@
 ## Demo 3
 
 1. Add Docker Build and Push tasks
+
+## YML assets
+
+Task: Publish Test Result
+
+```yml
+    steps:
+    - task: PublishTestResults@2
+    displayName: 'Publish Test Results **/test-*.xml'
+    inputs:
+        testResultsFiles: '**/test-*.xml'
+```
