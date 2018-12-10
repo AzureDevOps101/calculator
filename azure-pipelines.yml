@@ -16,10 +16,10 @@ steps:
     npm install
     npm run build
     npm test
-  displayName: 'npm install, build and test'
+  displayName: '[Run Script] npm install, build and test'
 
 - task: PublishTestResults@2
-  displayName: 'Publish Test Results **/test-*.xml'
+  displayName: '[Publish Test Results] **/test-*.xml'
   inputs:
       testResultsFiles: '**/test-*.xml'
   condition: succeededOrFailed()
