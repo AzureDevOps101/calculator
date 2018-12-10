@@ -16,7 +16,9 @@
 
 使用Docker构建和运行项目的方式：
 
-1. 运行以下命令完成 `calculator` 容器构建打包
+1. 复制 _demo-assets/demo-dockerfile 到根目录下的Dockerfile文件
+
+2. 运行以下命令完成 `calculator` 容器构建打包
 
 ```shell
 docker build -t calculator .
