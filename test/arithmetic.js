@@ -51,7 +51,7 @@ describe('Arithmetic', function() {
   });
 
   describe('Addition', function() {
-    it('adds two positive integers 21+21', function(done) {
+    it('adds two positive integers', function(done) {
       request.get('/arithmetic?operation=add&operand1=21&operand2=21')
           .expect(200)
           .end(function(err, res) {
