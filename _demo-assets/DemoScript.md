@@ -39,4 +39,5 @@ Task: Publish Test Result
     displayName: 'Publish Test Results **/test-*.xml'
     inputs:
         testResultsFiles: '**/test-*.xml'
+    condition: succeededOrFailed()
 ```
