@@ -1,35 +1,33 @@
+#!/usr/bin/env node
 
+/**
+ * Module dependencies.
+ */
+
+const app = require('./app');
+const debug = require('debug')('calculator:server');
+const http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = process.env.PORT || 3000 ;
-//app.set('port', portNum);
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
-var express = require('express'),
-  app = express();
+/**
+ * Create HTTP server.
+ */
 
-app.use(express.static('public'));
-
-var routes = require("./api/routes");
-routes(app);
-
-if (! module.parent) {
-  app.listen(port);
-}
-
-module.exports = app
-
-console.log("Server running on port " + process.env.PORT);
+const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-//server.listen(port);
-//server.on('error', onError);
-//server.on('listening', onListening);
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
