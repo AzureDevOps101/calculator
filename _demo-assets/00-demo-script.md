@@ -1,43 +1,48 @@
 # Calculator Demo for Azure Pipeline
 
-## Demo 1
+## Demo 1 - Integrate GitHub public repo with Azure Pipeline
 
-1. Search Github Marketplace for Azure Pipeline and setup for the project in dev.azure.com/AzureDevOps101
-2. In Template Page, show all templates. then show the yml view, talk about I don't know much about it
-3. Cancel the process, so I use UI to create the Pipeline
-4. In Location, choose "use visual designer"
-5. Create an "empty pipeline"
-6. Show the build pool list, and choose Ubuntu 1604
-7. add steps
-    1. npm install
-    2. npm run build
-    3. npm test
-8. trigger manually
-9. change api/controllers/arithmeticControllers.js adding function to trigger a test faliure
-10. Trigger manullay and show the test failed log
-11. Add another step to "Publish Test Results", make sure step "npm test" has "continue on err"
-12. Show build Summary and Test Tab
-13. Fix the problem and trigger another build and how build pass
+**Setup**
+	1. Git clone https://github.com/AzureDevOps101/calculator
+	2. Make the following changes 
+		a. Introduce the bug change (+a + +b) to (a + b)
+		b. Remove unit test for Additions to avoid test failure
+		c. Remove /azure-pipelines.yml so we can create to from scratch 
+	3. Push it back to Github for a new repo
 
-## Demo 2
+**Steps:**
 
-1. Enable build on Pull Reqeust
-2. Create a Fork and submit some change from fork
-3. Show the PR build and test failure
+### Section 1
 
-## Demo 3
+	1. Go to the new repo
+	2. Toto GitHub Marketplace and search for "Azure Pipeline"
+	3. Enable Azure Pipeline and setup an Azure Pipeline for the Calculator app
+	4. Add steps for packaging Artefacts
+	5. Add Release Pipeline to deploy application to Azure Web App 
+	6. Trigger deploy and show the app running
+	7. Send the URL to audience for testing
 
-1. Add Docker Build and Push tasks
+### Section 2
 
-## YML assets
+	1. Audience find the bug about a + b
+	2. Create an GitHub Issue and try to fix the issue
+	3. Follow TDD and add unit test for a + b first
+	4. Commit to master branch
+	5. Re-configure Azure Pipeline
+		a. Override YAML build triggers
+		b. Trigger on master branch
+		c. Trigger on Pull Request and require team member comment to start build
+		d. (Release Pipeline) only trigger on master branch (prevent PR build to trigger deploy)
 
-Task: Publish Test Result
+### Section 3
 
-```yml
-    steps:
-    - task: PublishTestResults@2
-    displayName: 'Publish Test Results **/test-*.xml'
-    inputs:
-        testResultsFiles: '**/test-*.xml'
-    condition: succeededOrFailed()
-```
+	1. Use another account leixu216
+	2. (leixu216) Fork the repo
+	3. (leixu216) commit #1 try to make some changes which is not going to fix the build
+	4. (leixu216) create PR to main repo 
+	5. (ups216) to trigger the build using /azurepipeline run
+	6. (ups216) use vscode PR extension to review the code
+	7. (leixu216) commit #2 finally fix the code 
+	8. (ups216) close the review, trigger build again (/azp run) and accept PR when build is ok
+	9. Check the CI/CD full pipeline is running and URL is updated
+    10. Ask audience to test 
