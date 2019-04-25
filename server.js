@@ -1,12 +1,15 @@
-var express = require('express'),
-  app = express();
+
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+var portNum = normalizePort(process.env.PORT || '3000');
+//app.set('port', portNum);
+
+var express = require('express'),
+  app = express(),
+  port = portNum;
 
 app.use(express.static('public'));
 
@@ -19,7 +22,7 @@ if (! module.parent) {
 
 module.exports = app
 
-console.log("Server running on port " + port);
+console.log("Server running on port " + process.env.PORT);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -45,7 +48,6 @@ function normalizePort(val) {
     // port number
     return port;
   }
-yuy
   return false;
 }
 
