@@ -1,6 +1,6 @@
 var supertest = require('supertest');
 var chai = require('chai');
-var app = require('../server');
+var app = require('../server-test');
 
 global.app = app;
 global.expect = chai.expect;
