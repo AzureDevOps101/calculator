@@ -8,7 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node ./server.js --production",
     "build": "exit 0",
     "test": "mocha --timeout 10000 --reporter mocha-multi-reporters --reporter-options configFile=test/config.json"
   },
