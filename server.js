@@ -4,12 +4,11 @@
  * Get port from environment and store in Express.
  */
 
-var portNum = normalizePort(process.env.PORT || '3000');
+const port = process.env.PORT || 3000 ;
 //app.set('port', portNum);
 
 var express = require('express'),
-  app = express(),
-  port = portNum;
+  app = express();
 
 app.use(express.static('public'));
 
