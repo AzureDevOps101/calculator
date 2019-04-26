@@ -3,14 +3,14 @@
 ## Demo 1 - Integrate GitHub public repo with Azure Pipeline
 
 **Setup**
-	1. Git clone https://github.com/AzureDevOps101/calculator
-	2. Make the following changes 
-		a. Introduce the bug change (+a + +b) to (a + b)
-		b. Remove unit test for Additions to avoid test failure
-		c. Remove /azure-pipelines.yml so we can create to from scratch 
-	3. Push it back to Github for a new repo
-    4. Create a Azure Web App for the Release Pipeline to use and make sure you have the following Configuration
-        WEBSITE_NODE_DEFAULT_VERSION = 8.9.4
+1. Git clone https://github.com/AzureDevOps101/calculator
+2. Make the following changes 
+	a. Introduce the bug change (+a + +b) to (a + b)
+	b. Remove unit test for Additions to avoid test failure
+	c. Remove /azure-pipelines.yml so we can create to from scratch 
+3. Push it back to Github for a new repo
+4. Create a Azure Web App for the Release Pipeline to use and make sure you have the following Configuration
+WEBSITE_NODE_DEFAULT_VERSION = 8.9.4
 
 **Steps:**
 
