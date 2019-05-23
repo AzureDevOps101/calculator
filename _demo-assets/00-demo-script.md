@@ -48,3 +48,7 @@ WEBSITE_NODE_DEFAULT_VERSION = 8.9.4
 	8. (ups216) close the review, trigger build again (/azp run) and accept PR when build is ok
 	9. Check the CI/CD full pipeline is running and URL is updated
     10. Ask audience to test 
+
+## Demo 2 - Docker Build and Deploy to AKS
+
+kubectl create secret docker-registry regcred --docker-server=azuredevops101.azurecr.io --docker-username=azuredevops101 --docker-password=xeqHO=1eZsqTJIqMvxG6kvOimasJ+mpd --docker-email=leixu@leansoftx.com
