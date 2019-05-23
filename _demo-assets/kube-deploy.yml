@@ -31,7 +31,7 @@ spec:
         service: calculator
     spec:
       containers:
-      - image: azuredevops101.azurecr.io/calculator:latest
+      - image: azuredevops101.azurecr.io/azuredevops101/calculator:latest
         name: calculator
         ports:
         - containerPort: 3000
