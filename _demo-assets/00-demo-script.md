@@ -51,4 +51,58 @@ WEBSITE_NODE_DEFAULT_VERSION = 8.9.4
 
 ## Demo 2 - Docker Build and Deploy to AKS
 
-kubectl create secret docker-registry regcred --docker-server=azuredevops101.azurecr.io --docker-username=azuredevops101 --docker-password=xeqHO=1eZsqTJIqMvxG6kvOimasJ+mpd --docker-email=leixu@leansoftx.com
+	1. Add a Dockerfile
+	2. Build the docker container and run it locally
+
+	```shell
+	docker build -t calculator:v2 .
+	```
+
+	3. Show the ACR and copy the key 
+
+	```shell
+	docker login {acr-name}.azurecr.io
+	```
+
+	4. Tag and push the image
+
+	```shell
+	docker tag calculator:v2 {acr-name}.azurecr.io/calculator:v2
+	docker push {acr-name}.azurecr.io/calculator:v2
+	```
+
+	5. Create kube-deploy.yml and deploy to AKS
+
+	```shell
+	az login
+	az account set -s {sub-id}
+	az aks get-credential -g {resourceGroup} -n {aksName}
+
+	kubectl create secret docker-registry regcred --docker-server={acr-name}.azurecr.io --docker-username={acr-name} --docker-password={acr-password} --docker-email=leixu@leansoftx.com
+
+	kubectl apploy -f kube-deploy.yml
+	```
+## Demo 3 - Create pipeline for docker build and AKS deployment
+
+	1. Create a classic build with Docker Container template
+		- tick add "latest" tags
+	2. Add the following 2 steps
+		- Copy File
+		- Publish Build Artifact
+		and publish kube-deploy.yml
+	3. Trigger the build
+	4. Create a release definition with Kubernetes Cluster deployment template
+		- create secret name: regcred
+
+## Demo 4 - Use Azure Dev Spaces in Visual Studio 2019 with .net core web app
+
+	1. create new .net core web app with mvc
+	2. Enable Dev Space
+	3. Start debugging and set breakpoint
+	4. add Environment.MachineName to show the container (pod) name
+
+## Demo 5 - Use Azure Dev Spaces in Visual Studio Code 
+
+	1. Following documentation from https://github.com/AzureDevOps101/BikeSharingApp
+
+	
