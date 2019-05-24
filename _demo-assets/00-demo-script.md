@@ -51,6 +51,18 @@ WEBSITE_NODE_DEFAULT_VERSION = 8.9.4
 
 ## Demo 2 - Docker Build and Deploy to AKS
 
+prep
+
+```shell
+az group create --name MyResourceGroup --location southeastasia
+az aks create -g MyResourceGroup -n MyAKS --location southeastasia --node-vm-size Standard_DS2_v2 --node-count 2 --disable-rbac --generate-ssh-keys
+
+az aks get-credentials -g MyResourceGroup -n MyAKS
+
+az aks use-dev-spaces -g MyResourceGroup -n MyAKS --space dev --yes
+
+```
+
 	1. Add a Dockerfile
 	2. Build the docker container and run it locally
 
@@ -104,5 +116,45 @@ WEBSITE_NODE_DEFAULT_VERSION = 8.9.4
 ## Demo 5 - Use Azure Dev Spaces in Visual Studio Code 
 
 	1. Following documentation from https://github.com/AzureDevOps101/BikeSharingApp
+
+
+## Demo 6 - Istio
+
+	1. show test environment and pipeline
+		- vote: http://13.76.172.131:31654/
+		- result: http://13.76.172.131:31844/
+
+	2. show production environment
+		- vote: http://vote.devopshub.cn
+		- result: http://result.devopshub.cn
+		show gateway.yaml
+
+	3. Sceanrio: v2 is ready to go live 
+
+	4. Use kubectl to explain how istio working
+
+	```shell
+
+	# rollback to old version first
+	kubectl apply -f vote-app-old.yml
+	# refresh http://vote.devlopshub.cn and always see v1
+
+	# start canary deployment 10% for vew version v2
+	kubectl apply -f vote-app-90-10.yml
+	# refresh http://vote.devlopshub.cn and see v2 for 10% of time
+	# try to change 50/50 and refresh again
+
+	# direct all traffic to v2
+	kubectl apply -f vote-app-new.yml
+	# refresh http://vote.devlopshub.cn and always see v2
+
+	# rollback to old version again
+	kubectl apply -f vote-app-old.yml
+	# refresh http://vote.devlopshub.cn and always see v1
+	```
+
+	5. Show the Production Pipeline and simulate the same process as above 
+
+
 
 	
