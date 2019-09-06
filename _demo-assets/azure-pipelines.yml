@@ -19,20 +19,4 @@ steps:
     npm install
     npm run build
     npm test
-  displayName: 'npm install, build and test'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Test Results **/test-*.xml'
-  inputs:
-    testResultsFiles: '**/test-*.xml'
-  condition: succeededOrFailed()
-
-- task: ArchiveFiles@2
-  displayName: 'Archive $(Build.SourcesDirectory)'
-  inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)'
-    includeRootFolder: false
-    archiveFile: '$(Build.ArtifactStagingDirectory)/Calculator-$(Build.BuildId).zip'
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
+  displayName: 'npm xxx steps'
