@@ -4,7 +4,7 @@
 
 **Setup**
 1. Git clone https://github.com/AzureDevOps101/calculator
-2. Make the following changes 
+2. Make the following changes
 	a. Introduce the bug change (+a + +b) to (a + b)
 	b. Remove unit test for Additions to avoid test failure
 	c. Remove /azure-pipelines.yml so we can create to from scratch 

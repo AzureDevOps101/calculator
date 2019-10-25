@@ -1,9 +1,5 @@
 # Calculator.js: node.js 演示项目
 
-[![Build Status](https://dev.azure.com/demo-devops101/ContosoAirDemo01/_apis/build/status/AzureDevOps101.calculator?branchName=master)](https://dev.azure.com/demo-devops101/ContosoAirDemo01/_build/latest?definitionId=37&branchName=master)
-[![Release Status](https://vsrm.dev.azure.com/demo-devops101/_apis/public/Release/badge/2ec01f49-3b2f-455f-8d61-c4c96d169cb9/2/2)](https://vsrm.dev.azure.com/demo-devops101/_apis/public/Release/badge/2ec01f49-3b2f-455f-8d61-c4c96d169cb9/2/2)
-
-
 本应用使用node.js创建，并包含了试用mocha的单元测试代码。本应用的运行状态为网页中的计算器，如下图：
 
 ![](calculator-ui.png)
