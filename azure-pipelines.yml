@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: NodeTool@0
@@ -18,11 +18,4 @@ steps:
 - script: |
     npm install
     npm run build
-    npm test
-  displayName: 'npm xxx steps'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Test Results'
-  inputs:
-    testResultsFiles: '../test-*'
-  condition: succeedOrFailed()
+  displayName: 'npm install and build'
