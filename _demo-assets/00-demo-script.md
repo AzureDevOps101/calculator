@@ -168,7 +168,7 @@ Enable github action for caculator app.
 6. in the Github action configuration file, default path is ".github/workflows/azure.yml", update the following parameters
 
 ```yml
-	AZURE_WEBAPP_NAME: <your app name> ## get this from azure
+  AZURE_WEBAPP_NAME: <your app name> ## get this from azure
 ```
 
 7. Update the following as the trigger
