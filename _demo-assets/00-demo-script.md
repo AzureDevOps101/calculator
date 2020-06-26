@@ -155,6 +155,41 @@ az aks use-dev-spaces -g MyResourceGroup -n MyAKS --space dev --yes
 
 	5. Show the Production Pipeline and simulate the same process as above 
 
+## Demo 7 - GitHub Actions
+
+Enable github action for caculator app.
+
+
+1. in Github repo, click on Action | New workflow
+2. Choose [Deploy Node.js to Azure Web App](https://github.com/actions/starter-workflows/blob/3c3736f59805d1e4f838182263705f44fab9cf68/ci/azure.yml) action
+3. In Azure Portal, create a "Web App" with Node 10.0 as the runtime
+4. Download "Publish Profile" from the web app homepage
+5. Create a secret in GitHub repo, name it AZURE_WEBAPP_PUBLISH_PROFILE and copy all content from "publish profile" into this secret
+6. in the Github action configuration file, default path is ".github/workflows/azure.yml", update the following parameters
+
+```yml
+	AZURE_WEBAPP_NAME: <your app name> ## get this from azure
+```
+
+7. Update the following as the trigger
+
+Note: this is only for demo purpose
+
+```yml
+on:
+  ##release:
+  ##  types: [created]
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+```
+
+8. Commit the yml file will trigger the action to push the app into web app
+
+then you can start your demo for the calculator scenario.
+
+
 
 
 	
