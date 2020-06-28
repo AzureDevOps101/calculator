@@ -1,5 +1,9 @@
 # Calculator.js: node.js 演示项目
 
+![.github/workflows/azure.yml](https://github.com/idcf-boat-house/boat-house-calculator/workflows/.github/workflows/azure.yml/badge.svg)
+
+Demo: https://boat-house-calculator.azurewebsites.net/
+
 本应用使用node.js创建，并包含了试用mocha的单元测试代码。本应用的运行状态为网页中的计算器，如下图：
 
 ![](calculator-ui.png)
