@@ -12,7 +12,7 @@ Demo: https://boat-house-calculator.azurewebsites.net/
 
 使用mocah编写的测试代码可以完成所有以上API内部运算运算逻辑的验证，最终使用 `mocha-junit-reports` 来生成XML格式的测试结果文件以便 [Azure DevOps](https://azure.com/devops) 可以读取测试结果提供DevOps流水线的测试集成。
 
-本地构建本项目的方式：
+本地构建本项目的方式： 
 
 1. 运行 `npm install` 安装所有依赖包
 2. 运行 `npm test` 运行所有测试
