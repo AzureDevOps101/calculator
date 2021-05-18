@@ -27,6 +27,16 @@ steps:
     testResultsFiles: '**/test-*.xml'
   condition: succeededOrFailed()
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerregistry'
+    repository: 'calculator'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: |
+      $(Build.BuildId)
+      latest
+
 - task: ArchiveFiles@2
   displayName: 'Archive $(Build.SourcesDirectory)'
   inputs:
