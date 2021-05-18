@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  calculator:
+    build: .
+    command: npm start
+    ports:
+      - "3000:3000"
+    networks:
+      - calculator-network
+
+networks:
+    calculator-network:
