@@ -105,6 +105,8 @@ az aks use-dev-spaces -g MyResourceGroup -n MyAKS --space dev --yes
 	3. Trigger the build
 	4. Create a release definition with Kubernetes Cluster deployment template
 		- create secret name: regcred
+	5. kube-deploy.yaml location 
+		$(System.DefaultWorkingDirectory)/_calculator/drop/kube-deploy.yaml
 
 ## Demo 4 - Use Azure Dev Spaces in Visual Studio 2019 with .net core web app
 
