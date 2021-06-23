@@ -63,7 +63,7 @@ pipeline {
                         success{
                             echo "clearn up local images ..."
                             sh 'docker rmi -f ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:latest'
-                            sh 'docker rmi -f ${REGISTRY_URL}/${REGISTRY_NS}/${env.BRANCH_NAME}-${env.BUILD_ID}'
+                            sh 'docker rmi -f ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:${env.BRANCH_NAME}-${env.BUILD_ID}'
                         }
                     }
                 }
