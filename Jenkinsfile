@@ -38,8 +38,8 @@ pipeline {
 
                 stage('Unit Tests') {
                     steps {
-                        sh 'docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrun up'
-                        sh 'docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrun down -v --rmi all --remove-orphans'
+                        sh "docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrun up"
+                        sh "docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrun down -v --rmi all --remove-orphans"
                     }
                     post {
                         always{
@@ -52,18 +52,18 @@ pipeline {
                 stage('Docker Build') {
                     steps {
                         echo "Docker Build ... "
-                        sh 'docker build -f Dockerfile -t ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:latest -t ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:${BUILD_NUMBER} .'
+                        sh "docker build -f Dockerfile -t ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:latest -t ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:${env.BRANCH_NAME}-${env.BUILD_ID} ."
                         echo "Docker Login to docker registry ..."
                         sh 'docker login ${REGISTRY_URL} -u ${REGISTRY_USER} -p ${REGISTRY_PWD}'
                         echo "Docker Push ..."
-                        sh 'docker push ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:latest'
-                        sh 'docker push ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:${BUILD_NUMBER}'
+                        sh "docker push ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:latest"
+                        sh "docker push ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:${env.BRANCH_NAME}-${env.BUILD_ID}"
                     }
                     post {
                         success{
                             echo "clearn up local images ..."
-                            sh 'docker rmi -f ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:latest'
-                            sh 'docker rmi -f ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:${BUILD_NUMBER}'
+                            sh "docker rmi -f ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:latest"
+                            sh "docker rmi -f ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:${env.BRANCH_NAME}-${env.BUILD_ID}"
                         }
                     }
                 }
