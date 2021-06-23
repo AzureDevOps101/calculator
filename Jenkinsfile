@@ -30,13 +30,13 @@ pipeline {
 
         stage('CI'){
             parallel {
-                stage('CI - SonarQube Check') {
+                stage('SonarQube Check') {
                     steps {
                         sh 'docker run --rm -e SONAR_HOST_URL="${SONAR_HOST_URL}" -e SONAR_LOGIN="${SONAR_LOGIN}" -v "${PWD}:/usr/src" sonarsource/sonar-scanner-cli'
                     }
                 }
 
-                stage('CI - Unit Tests & Publish Result') {
+                stage('Unit Tests') {
                     steps {
                         sh 'docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrun up'
                         sh 'docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrundown -v --rmi all --remove-orphans'
@@ -49,7 +49,7 @@ pipeline {
                     }
                 }
 
-                stage('CI - Docker Build & Push') {
+                stage('Docker Build') {
                     steps {
                         echo "Docker Build ... "
                         sh 'docker build -f Dockerfile -t ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:latest .'
