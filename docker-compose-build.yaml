@@ -1,8 +1,0 @@
-version: '3'
-services:
-  calculator-build:
-    image: node:12-slim
-    volumes:
-      - .:/build
-    working_dir: /build
-    command: bash -c "npm install && npm run test"
