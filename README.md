@@ -38,6 +38,8 @@ docker run -itd -p 8080:3000 calculator
 
 使用Docker容器的方式运行sonar-scanner-cli
 
+将 sonar-project.properties 移动到根目录，然后运行一下命令
+
 ```shll
 docker run \
     --rm \
