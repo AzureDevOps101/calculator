@@ -32,7 +32,7 @@ pipeline {
             post {
                 success{
                     echo "clearn up local images ..."
-                    sh 'docker rmi -f boathouse-calculator:latest‘
+                    sh 'docker rmi -f boathouse-calculator:latest'
                 }
             }
         }
