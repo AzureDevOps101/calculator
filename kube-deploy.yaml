@@ -4,7 +4,7 @@ metadata:
   name: boathouse-calculator
   namespace: #{K8S_NAMESPACE_TEST}#
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: boathouse-calculator
