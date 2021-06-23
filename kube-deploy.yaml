@@ -22,7 +22,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: boathouse-calculator
-        image: #{REGISTRY_URL}#/#{REGISTRY_NS}#/hello-boathouse:latest
+        image: #{REGISTRY_URL}#/#{REGISTRY_NS}#/boathouse-calculator:latest
         ports:
         - containerPort: 3000
         resources:
@@ -38,6 +38,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: boathouse-calculator
+  namespace: #{K8S_NAMESPACE_TEST}#
 spec:
   type: LoadBalancer
   ports:
