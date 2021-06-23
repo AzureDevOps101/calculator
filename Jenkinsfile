@@ -65,18 +65,18 @@ pipeline {
               script {
                 server = getHost()
                 echo "copy docker-compose file to remote server..."       
-                sshRemove remote: server, path: "./boathouse-calculator-deploy/docker-compose-template.yaml"   // 先删除远程服务器上的文件，已确保是最新的文件
-                sshPut remote: server, from: 'docker-compose-template.yaml', into: './boathouse-calculator-deploy/'
+                sshRemove remote: server, path: "./docker-compose-template-calculator.yaml"   // 先删除远程服务器上的文件，已确保是最新的文件
+                sshPut remote: server, from: './docker-compose-template.yaml', into: './docker-compose-calculator.yaml'
                 
                 echo "stopping previous docker containers..."       
                 sshCommand remote: server, command: "docker login ${REGISTRY_URL} -u ${REGISTRY_USER} -p ${REGISTRY_PWD}"
-                sshCommand remote: server, command: "docker-compose -f ./boathouse-calculator-deploy/docker-compose-template.yaml -p boathouse-calculator down"
+                sshCommand remote: server, command: "docker-compose -f docker-compose-calculator.yaml -p boathouse-calculator down"
                 
                 echo "pulling newest docker images..."
-                sshCommand remote: server, command: "docker-compose -f ./boathouse-calculator-deploy/docker-compose-template.yaml -p boathouse-calculator pull"
+                sshCommand remote: server, command: "docker-compose -f docker-compose-calculator.yaml -p boathouse-calculator pull"
                 
                 echo "restarting new docker containers..."
-                sshCommand remote: server, command: "docker-compose -f ./boathouse-calculator-deploy/docker-compose-template.yaml -p boathouse-calculator up -d"
+                sshCommand remote: server, command: "docker-compose -f docker-compose-calculator.yaml -p boathouse-calculator up -d"
                 
                 echo "DEV Environment successfully deployed!"
               }
