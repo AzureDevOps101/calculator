@@ -56,5 +56,31 @@ pipeline {
                 }
             }
         }
+
+        // dev 环境
+        stage('Deploy - DEV') { 
+            steps {
+              sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' docker-compose-template.yaml"
+              sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' docker-compose-template.yaml"
+              script {
+                server = getHost()
+                echo "copy docker-compose file to remote server..."       
+                sshRemove remote: server, path: "./boathouse-calculator-deploy/docker-compose-template.yaml"   // 先删除远程服务器上的文件，已确保是最新的文件
+                sshPut remote: server, from: 'docker-compose-template.yaml', into: './boathouse-calculator-deploy/'
+                
+                echo "stopping previous docker containers..."       
+                sshCommand remote: server, command: "docker login ${REGISTRY_URL} -u ${REGISTRY_USER} -p ${REGISTRY_PWD}"
+                sshCommand remote: server, command: "docker-compose -f ./boathouse-calculator-deploy/docker-compose-template.yaml -p boathouse-calculator down"
+                
+                echo "pulling newest docker images..."
+                sshCommand remote: server, command: "docker-compose -f ./boathouse-calculator-deploy/docker-compose-template.yaml -p boathouse-calculator pull"
+                
+                echo "restarting new docker containers..."
+                sshCommand remote: server, command: "docker-compose -f ./boathouse-calculator-deploy/docker-compose-template.yaml -p boathouse-calculator up -d"
+                
+                echo "DEV Environment successfully deployed!"
+              }
+            }
+        }
     }
 }
