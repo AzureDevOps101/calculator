@@ -27,6 +27,12 @@ pipeline {
           }
         }
 
+        stage('SonarQube Check') {
+            steps {
+                sh 'docker run --rm -e SONAR_HOST_URL="http://192.168.99.102:9000" -e SONAR_LOGIN="eb651e5318537eae7f14fe1534009b6c031bba0d" -v "${PWD}:/usr/src" sonarsource/sonar-scanner-cli'
+            }
+        }
+
         stage('Unit Tests & Publish Result') {
             steps {
                 sh 'docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrun up'
