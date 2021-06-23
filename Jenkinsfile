@@ -89,5 +89,17 @@ pipeline {
               }
             }
         }
+
+        // 测试环境部署
+        stage('Deploy - K8S TEST') {
+            steps {
+                timeout(5) {
+                    input message: '是否部署到测试环境?', ok: '是', submitter: 'admin'
+                }
+                sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' kube-deploy.yaml"
+              sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' kube-deploy.yaml"
+                kubernetesDeploy configs: 'kube-deploy.yaml', deleteResource: false, kubeConfig: [path: ''], kubeconfigId: 'minikube', secretName: 'regcred', secretNamespace: 'boathouse-test', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+            }
+        }
     }
 }
