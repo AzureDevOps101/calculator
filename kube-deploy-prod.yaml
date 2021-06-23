@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: boathouse-calculator
-  namespace: #{K8S_NAMESPACE_TEST}#
+  namespace: #{K8S_NAMESPACE}#
 spec:
   replicas: 1
   selector:
@@ -38,7 +38,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: boathouse-calculator
-  namespace: #{K8S_NAMESPACE_TEST}#
+  namespace: #{K8S_NAMESPACE}#
 spec:
   type: LoadBalancer
   ports:

@@ -48,3 +48,6 @@ docker run \
 ```
 
 kubectl create secret docker-registry regcred --docker-server=registry.cn-hangzhou.aliyuncs.com --docker-username=boathouse216 --docker-password=devops@2021 --docker-email=info@idcf.io -n boathouse-test
+
+
+kubectl create secret docker-registry regcred --docker-server=registry.cn-hangzhou.aliyuncs.com --docker-username=boathouse216 --docker-password=devops@2021 --docker-email=info@idcf.io -n boathouse-prod

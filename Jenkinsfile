@@ -28,13 +28,13 @@ pipeline {
           }
         }
 
-        stage('SonarQube Check') {
+        stage('CI - SonarQube Check') {
             steps {
                 sh 'docker run --rm -e SONAR_HOST_URL="${SONAR_HOST_URL}" -e SONAR_LOGIN="${SONAR_LOGIN}" -v "${PWD}:/usr/src" sonarsource/sonar-scanner-cli'
             }
         }
 
-        stage('Unit Tests & Publish Result') {
+        stage('CI - Unit Tests & Publish Result') {
             steps {
                 sh 'docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrun up'
                 sh 'docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrundown -v --rmi all --remove-orphans'
@@ -47,7 +47,7 @@ pipeline {
             }
         }
 
-        stage('Docker Build & Push') {
+        stage('CI - Docker Build & Push') {
             steps {
                 echo "Docker Build ... "
                 sh 'docker build -f Dockerfile -t ${REGISTRY_URL}/${REGISTRY_NS}/boathouse-calculator:latest .'
@@ -65,7 +65,7 @@ pipeline {
         }
 
         // dev 环境
-        stage('Deploy - DEV') { 
+        stage('CD - DEV') { 
             steps {
               sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' docker-compose-template.yaml"
               sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' docker-compose-template.yaml"
@@ -91,15 +91,28 @@ pipeline {
         }
 
         // 测试环境部署
-        stage('Deploy - K8S TEST') {
+        stage('CD - K8S TEST') {
             steps {
                 timeout(5) {
                     input message: '是否部署到测试环境?', ok: '是', submitter: 'admin'
                 }
-                sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' kube-deploy.yaml"
-                sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' kube-deploy.yaml"
-                sh "sed -i 's/#{K8S_NAMESPACE_TEST}#/${K8S_NAMESPACE_TEST}/g' kube-deploy.yaml"
-                kubernetesDeploy configs: 'kube-deploy.yaml', deleteResource: false, kubeconfigId: 'minikube', secretName: 'regcred', secretNamespace: 'boathouse-test'
+                sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' kube-deploy-test.yaml"
+                sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' kube-deploy-test.yaml"
+                sh "sed -i 's/#{K8S_NAMESPACE}#/${K8S_NAMESPACE_TEST}/g' kube-deploy-test.yaml"
+                kubernetesDeploy configs: 'kube-deploy-test.yaml', deleteResource: false, kubeconfigId: 'minikube', secretName: 'regcred', secretNamespace: 'boathouse-test'
+            }
+        }
+
+        // 测试环境部署
+        stage('CD - K8S Prod') {
+            steps {
+                timeout(5) {
+                    input message: '是否部署到生产环境?', ok: '是', submitter: 'admin'
+                }
+                sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' kube-deploy-prod.yaml"
+                sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' kube-deploy-prod.yaml"
+                sh "sed -i 's/#{K8S_NAMESPACE}#/${K8S_NAMESPACE_PROD}/g' kube-deploy-prod.yaml"
+                kubernetesDeploy configs: 'kube-deploy-prod.yaml', deleteResource: false, kubeconfigId: 'minikube', secretName: 'regcred', secretNamespace: 'boathouse-test'
             }
         }
     }
