@@ -29,8 +29,8 @@ pipeline {
 
         stage('Unit Tests & Publish Result') {
             steps {
-                sh 'docker-compose -f docker-compose-build.yml -p boathouse-calculator-testrun up'
-                sh 'docker-compose -f docker-compose-build.yml -p boathouse-calculator-testrundown -v --rmi all --remove-orphans'
+                sh 'docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrun up'
+                sh 'docker-compose -f docker-compose-build.yaml -p boathouse-calculator-testrundown -v --rmi all --remove-orphans'
             }
             post {
                 always{
