@@ -99,13 +99,7 @@ pipeline {
                 sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' kube-deploy.yaml"
                 sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' kube-deploy.yaml"
                 sh "sed -i 's/#{K8S_NAMESPACE_TEST}#/${K8S_NAMESPACE_TEST}/g' kube-deploy.yaml"
-                kubernetesDeploy 
-                    configs: 'kube-deploy.yaml', 
-                    deleteResource: false, 
-                    kubeConfig: [path: ''], 
-                    kubeconfigId: 'minikube', 
-                    secretName: 'regcred', 
-                    secretNamespace: 'boathouse-test'
+                kubernetesDeploy configs: 'kube-deploy.yaml', deleteResource: false, kubeconfigId: 'minikube', secretName: 'regcred', secretNamespace: 'boathouse-test'
             }
         }
     }
