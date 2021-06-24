@@ -48,3 +48,27 @@ docker run \
     -v "${PWD}:/usr/src" \
     sonarsource/sonar-scanner-cli
 ```
+
+## Run Postman Collection in Docker
+
+使用PostMan编写和运行API测试
+
+```shell
+# install newman to run postman collections in command line https://www.npmjs.com/package/newman
+npm install -g newman
+# install newman-reporter-junit to export test report in juntest format https://www.npmjs.com/package/newman-reporter-junitfull
+npm install -g newman-reporter-junitfull
+
+## newman sample command
+newman run postman/boathouse-calculator.postman_collection.json -e postman/local-dev.postman_environment.json
+
+## newman sample command with junit report export
+newman run postman/boathouse-calculator.postman_collection.json -e postman/local-dev.postman_environment.json -r junitfull --reporter-junitfull-export './postman/result.xml' -n 2
+```
+
+```shell
+## run newman using the newman docker container
+docker run -v "${PWD}/postman:/etc/newman" -t postman/newman:alpine run boathouse-calculator.postman_collection.json -e local-dev.postman_environment.json
+## with junit format report 
+docker run -v "${PWD}/postman:/etc/newman" -t postman/newman:alpine run boathouse-calculator.postman_collection.json -e local-dev.postman_environment.json --reporters junit --reporter-junit-export 'result-docker.xml'
+```
