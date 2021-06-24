@@ -53,6 +53,8 @@ docker run \
 
 使用PostMan编写和运行API测试
 
+![](postman/postman.png)
+
 ```shell
 # install newman to run postman collections in command line https://www.npmjs.com/package/newman
 npm install -g newman
