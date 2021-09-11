@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: tekton-sample-catapp-pipeline
+  name: boathouse-calculator-pipeline
 spec:
   params:
     - name: BUILDER_IMAGE
