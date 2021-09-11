@@ -29,9 +29,7 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
-      imagePullSecrets:
-      - name: regcred
-      restartPolicy: Always
+      restartPolicy: Never
 ---
 apiVersion: v1
 kind: Service
