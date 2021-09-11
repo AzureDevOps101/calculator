@@ -1,0 +1,31 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: tekton-sample-catapp-pipeline
+spec:
+  params:
+    - name: BUILDER_IMAGE
+      description: The image on which builds will run
+      default: boathouse-calculator:latest
+  resources:
+    - name: source
+      type: git
+  tasks:
+    - name: build
+      taskRef:
+        name: bh-build-docker
+      params:
+        - name: BUILDER_IMAGE
+          value: $(params.BUILDER_IMAGE)
+      resources:
+        inputs:
+          - name: source
+            resource: source
+    - name: deploy
+      runAfter: [build]
+      taskRef:
+        name: bh-deploy-kubectl
+      resources:
+        inputs:
+          - name: source
+            resource: source

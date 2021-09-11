@@ -1,0 +1,44 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: bh-build-docker
+spec:
+  inputs:
+    resources:
+      - name: source
+        type: git
+    params:
+      - name: DOCKERFILE
+        description: Path to the Dockerfile to build.
+        default: ./Dockerfile
+      - name: CONTEXT
+        description: The build context used by Docker.
+        default: ./
+      - name: BUILDER_IMAGE
+        description: The image on which builds will run
+        default: myapp:latest
+  steps:
+    - name: docker
+      image: docker
+      workingDir: /workspace/source
+      command: ["docker"]
+      args:
+        - build
+        - -f
+        - $(inputs.params.DOCKERFILE)
+        - -t
+        - $(inputs.params.BUILDER_IMAGE)
+        - $(inputs.params.CONTEXT)
+      volumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+        - name: docker-library
+          mountPath: /var/lib/docker
+  volumes:
+    - name: docker-socket
+      hostPath:
+        path: /var/run/docker.sock
+        type: Socket
+    - name: docker-library
+      hostPath:
+        path: /var/lib/docker
