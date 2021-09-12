@@ -24,19 +24,16 @@ spec:
       params:
         - name: IMAGE_NAME
           value: $(params.IMAGE_NAME)
+        - name: DOCKER_USER
+          value: $(params.DOCKER_USER)
+        - name: DOCKER_PASS
+          value: $(params.DOCKER_PASS)
+        - name: DOCKER_REGISTRY
+          value: $(params.DOCKER_REGISTRY)
       resources:
         inputs:
           - name: source
             resource: source
-    - name: push
-      runAfter: [build]
-      image: quay.io/buildah/stable
-      command: ['buildah', 'push', '--creds=$(params.DOCKER_USER):$(params.DOCKER_PASS)', '--tls-verify=false', '$(params.DOCKER_REGISTRY)/$(params.DOCKER_USER)/$(params.IMAGE_NAME)', 'docker://$(params.DOCKER_REGISTRY)/$(params.DOCKER_USER)/$(params.IMAGE_NAME)']
-      volumeMounts:
-        - name: varlibcontainers
-          mountPath: /var/lib/containers
-      securityContext:
-        privileged: true
     - name: deploy
       runAfter: [build]
       taskRef:
