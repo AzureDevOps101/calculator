@@ -1,4 +1,4 @@
-FROM node:14-slim
+FROM docker.io/library/node:14-slim
 
 # Create app directory
 WORKDIR /usr/src/app
