@@ -14,7 +14,7 @@ spec:
       - name: CONTEXT
         description: The build context used by Docker.
         default: ./
-      - name: BUILDER_IMAGE
+      - name: IMAGE_NAME
         description: The image on which builds will run
         default: myapp:latest
   steps:
@@ -27,7 +27,7 @@ spec:
         - -f
         - $(inputs.params.DOCKERFILE)
         - -t
-        - $(inputs.params.BUILDER_IMAGE)
+        - $(inputs.params.IMAGE_NAME)
         - $(inputs.params.CONTEXT)
       volumeMounts:
         - name: docker-socket
