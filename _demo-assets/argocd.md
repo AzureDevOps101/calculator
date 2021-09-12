@@ -36,3 +36,10 @@ argocd account update-password
 argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace default
 argocd app get guestbook
 ```
+
+## Create boathouse-calcualtor
+
+```shell
+argocd app create boathouse-calculator --repo https://github.com/idcf-boat-house/boathouse-calculator.git --path kubeconfig --revision tid --dest-server https://kubernetes.default.svc --dest-namespace default
+argocd app get boathouse-calculator
+```
