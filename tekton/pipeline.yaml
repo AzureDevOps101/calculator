@@ -29,6 +29,7 @@ spec:
           - name: source
             resource: source
     - name: push
+      runAfter: [build]
       image: quay.io/buildah/stable
       command: ['buildah', 'push', '--creds=$(params.DOCKER_USER):$(params.DOCKER_PASS)', '--tls-verify=false', '$(params.DOCKER_REGISTRY)/$(params.DOCKER_USER)/$(params.IMAGE_NAME)', 'docker://$(params.DOCKER_REGISTRY)/$(params.DOCKER_USER)/$(params.IMAGE_NAME)']
       volumeMounts:
@@ -44,3 +45,8 @@ spec:
         inputs:
           - name: source
             resource: source
+  volumes:
+    - name: varlibcontainers
+      emptyDir: {}
+    - name: gensource
+      emptyDir: {}
