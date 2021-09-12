@@ -42,8 +42,3 @@ spec:
         inputs:
           - name: source
             resource: source
-  volumes:
-    - name: varlibcontainers
-      emptyDir: {}
-    - name: gensource
-      emptyDir: {}

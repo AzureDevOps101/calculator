@@ -42,7 +42,6 @@ spec:
         - name: docker-library
           mountPath: /var/lib/docker
     - name: docker-push
-      runAfter: [docker-build]
       image: quay.io/buildah/stable
       command: ["buildah"]
       args:
