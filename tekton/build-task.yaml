@@ -36,7 +36,7 @@ spec:
         - -f 
         - $(params.DOCKERFILE)
         - -t
-        - $(params.DOCKER_REGISTRY)/$(params.DOCKER_USER)/$(params.IMAGE_NAME):latest
+        - $(params.DOCKER_USER)/$(params.IMAGE_NAME):latest
         - $(params.CONTEXT)
       volumeMounts:
         - name: varlibcontainers
