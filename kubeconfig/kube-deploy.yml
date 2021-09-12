@@ -19,7 +19,7 @@ spec:
           image: ups216/boathouse-calculator:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 3000
+            - containerPort: 3006
               protocol: TCP
 ---
 apiVersion: v1
@@ -30,6 +30,6 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 3000
+    targetPort: 3006
   selector:
     app: boathouse-calculator
