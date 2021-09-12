@@ -10,10 +10,10 @@ spec:
     params:
       - name: DOCKERFILE
         description: Path to the Dockerfile to build.
-        default: ./Dockerfile
+        default: /workspace/source/Dockerfile
       - name: CONTEXT
         description: The build context used by Docker.
-        default: ./
+        default: /workspace/source/
       - name: IMAGE_NAME
         description: The image on which builds will run
         default: myapp:latest
@@ -25,23 +25,25 @@ spec:
         type: string
         default: "docker.io"
   steps:
-    - name: docker-build
-      image: docker
+    - name: buildah-docker-build
+      image: quay.io/buildah/stable
       workingDir: /workspace/source
-      command: ["docker"]
+      command: ["buildah"]
       args:
-        - build
-        - -f
-        - $(inputs.params.DOCKERFILE)
+        - bud
+        - --tls-verify=false
+        - --layers
+        - -f 
+        - $(params.DOCKERFILE)
         - -t
-        - $(inputs.params.IMAGE_NAME)
-        - $(inputs.params.CONTEXT)
+        - $(params.DOCKER_REGISTRY)/$(params.DOCKER_USER)/$(params.IMAGE_NAME)
+        - $(params.CONTEXT)
       volumeMounts:
-        - name: docker-socket
-          mountPath: /var/run/docker.sock
-        - name: docker-library
-          mountPath: /var/lib/docker
-    - name: docker-push
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+      securityContext: 
+        privileged: true
+    - name: buildah-docker-push
       image: quay.io/buildah/stable
       command: ["buildah"]
       args:
@@ -56,10 +58,6 @@ spec:
       securityContext:
         privileged: true
   volumes:
-    - name: docker-socket
-      hostPath:
-        path: /var/run/docker.sock
-        type: Socket
     - name: docker-library
       hostPath:
         path: /var/lib/docker
