@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: boathouse-calculator
-          image: boathouse-calculator:latest
-          imagePullPolicy: Never
+          image: ups216/boathouse-calculator:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
               protocol: TCP

@@ -34,11 +34,3 @@ spec:
         inputs:
           - name: source
             resource: source
-    - name: deploy
-      runAfter: [build]
-      taskRef:
-        name: bh-deploy-kubectl
-      resources:
-        inputs:
-          - name: source
-            resource: source
