@@ -191,6 +191,23 @@ on:
 
 then you can start your demo for the calculator scenario.
 
+## Demo 8 - Containerized E2E Workspace
+
+1. git clone && cd boathouse-calcualtor
+2. vscode detect devcontainer.json exists, then prompt for "Open in Container", click it
+3. show the vscode status bar showing "Dev Container: Node.js", we are now working in a container
+4. try to run the following command 
+
+	```shell
+	npm install
+	npm start
+	```
+
+	talk point #1 - you can see that vscode is able to execute commands inside a container, this allow developers to do node.js development without install a node.js environment 
+
+	talk point #2 - vscode will open a localhost:port and allow you to access the app, this is done via SSH tunneling. This allow us to dynamically open port and access as localhost:port 
+
+5. try to start debugging, show that you can setup a breakpoint and tack the debugging process, this is possible because vscode is using DAP (Debugger Adaptor Protocal) to connect a debugger port inside the container.
 
 
 
