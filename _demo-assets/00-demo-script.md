@@ -209,6 +209,14 @@ then you can start your demo for the calculator scenario.
 
 5. try to start debugging, show that you can setup a breakpoint and tack the debugging process, this is possible because vscode is using DAP (Debugger Adaptor Protocal) to connect a debugger port inside the container.
 
+6. Tekton Pipline 
+
+7. ArgoCD
+
+```shell
+argocd app create boathouse-calculator --repo https://github.com/idcf-boat-house/boathouse-calculator.git --path kubeconfig --revision tid --dest-server https://kubernetes.default.svc --dest-namespace default
+argocd app get boathouse-calculator
+```
 
 
 	
