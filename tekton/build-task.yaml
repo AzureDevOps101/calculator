@@ -1,0 +1,65 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: bh-build-docker
+spec:
+  inputs:
+    resources:
+      - name: source
+        type: git
+    params:
+      - name: DOCKERFILE
+        description: Path to the Dockerfile to build.
+        default: /workspace/source/Dockerfile
+      - name: CONTEXT
+        description: The build context used by Docker.
+        default: /workspace/source/
+      - name: IMAGE_NAME
+        description: The image on which builds will run
+        default: myapp:latest
+      - name: DOCKER_USER
+        type: string
+      - name: DOCKER_PASS
+        type: string
+      - name: DOCKER_REGISTRY
+        type: string
+        default: "docker.io"
+  steps:
+    - name: buildah-docker-build
+      image: quay.io/buildah/stable
+      workingDir: /workspace/source
+      command: ["buildah"]
+      args:
+        - bud
+        - --tls-verify=false
+        - --layers
+        - -f 
+        - $(params.DOCKERFILE)
+        - -t
+        - $(params.DOCKER_REGISTRY)/$(params.DOCKER_USER)/$(params.IMAGE_NAME)
+        - $(params.CONTEXT)
+      volumeMounts:
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+      securityContext: 
+        privileged: true
+    - name: buildah-docker-push
+      image: quay.io/buildah/stable
+      command: ["buildah"]
+      args:
+        - push
+        - --creds=$(params.DOCKER_USER):$(params.DOCKER_PASS)
+        - --tls-verify=false
+        - $(params.DOCKER_REGISTRY)/$(params.DOCKER_USER)/$(params.IMAGE_NAME)
+        - docker://$(params.DOCKER_REGISTRY)/$(params.DOCKER_USER)/$(params.IMAGE_NAME)
+      volumeMounts:
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+      securityContext:
+        privileged: true
+  volumes:
+    - name: docker-library
+      hostPath:
+        path: /var/lib/docker
+    - name: varlibcontainers
+      emptyDir: {}

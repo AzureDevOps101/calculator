@@ -1,0 +1,36 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: boathouse-calculator-pipeline
+spec:
+  params:
+    - name: IMAGE_NAME
+      description: The image on which builds will run
+      default: boathouse-calculator:latest
+    - name: DOCKER_USER
+      type: string
+    - name: DOCKER_PASS
+      type: string
+    - name: DOCKER_REGISTRY
+      type: string
+      default: "docker.io"
+  resources:
+    - name: source
+      type: git
+  tasks:
+    - name: build
+      taskRef:
+        name: bh-build-docker
+      params:
+        - name: IMAGE_NAME
+          value: $(params.IMAGE_NAME)
+        - name: DOCKER_USER
+          value: $(params.DOCKER_USER)
+        - name: DOCKER_PASS
+          value: $(params.DOCKER_PASS)
+        - name: DOCKER_REGISTRY
+          value: $(params.DOCKER_REGISTRY)
+      resources:
+        inputs:
+          - name: source
+            resource: source
