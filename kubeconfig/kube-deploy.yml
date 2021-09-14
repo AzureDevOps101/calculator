@@ -5,7 +5,7 @@ metadata:
   labels:
     app: boathouse-calculator
 spec:
-  replicas: 1
+  replicas: 10
   selector:
     matchLabels:
       app: boathouse-calculator
