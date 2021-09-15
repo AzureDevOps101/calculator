@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: bh-deploy-kubectl
+spec:
+  inputs:
+    resources:
+    - name: source
+      type: git
+    params:
+    - name: K8S_DIRECTORY_PATH
+      description: Path to the directory for kubectl apply -f
+      default: kubeconfig/
+  steps:
+  - name: apply-config
+    image: lachlanevenson/k8s-kubectl
+    workingDir: /workspace/source
+    command: ['kubectl']
+    args:
+    - apply
+    - -f
+    - $(inputs.params.K8S_DIRECTORY_PATH)
