@@ -34,6 +34,26 @@ docker run -itd -p 8080:3000 calculator
 
 应用启动后的状态如上图。
 
+## Smartide 本地运行
+1. Mac、Linux安装smartide
+
+```shell
+curl -sSL  https://smartidedl.blob.core.chinacloudapi.cn/releases/$(curl -L -s https://smartidedl.blob.core.chinacloudapi.cn/releases/stable-osx.txt) | tar -xzC /usr/local/bin/
+
+chmod +x /usr/local/bin/smartide
+```
+
+2. 在boathouse-calculator目录运行 `smartide start` 命令启动开发容器，自动打开 http://localhost:3030
+![](images/smartideweb.png)
+
+3. 运行和调试
+   1.  Terminal > New Terminal 打开命令行窗口，`npm i`安装依赖包
+   ![](images/npmi.png)
+   2. 运行项目，打开http://localhost:3031 ,设置断点调试
+   ![](images/debug.png)
+
+
+
 ## SonaQube 运行
 
 使用Docker容器的方式运行sonar-scanner-cli
@@ -74,3 +94,4 @@ docker run -v "${PWD}/postman:/etc/newman" -t postman/newman:alpine run boathous
 ## with junit format report 
 docker run -v "${PWD}/postman:/etc/newman" -t postman/newman:alpine run boathouse-calculator.postman_collection.json -e local-dev.postman_environment.json --reporters junit --reporter-junit-export 'result-docker.xml'
 ```
+
