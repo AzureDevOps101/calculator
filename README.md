@@ -35,7 +35,7 @@ docker run -itd -p 8080:3000 calculator
 应用启动后的状态如上图。
 
 ## Smartide 本地运行
-1. Mac、Linux安装smartide
+1. Mac安装smartide
 
 ```shell
 curl -sSL  https://smartidedl.blob.core.chinacloudapi.cn/releases/$(curl -L -s https://smartidedl.blob.core.chinacloudapi.cn/releases/stable-osx.txt) | tar -xzC /usr/local/bin/
