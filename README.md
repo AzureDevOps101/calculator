@@ -35,13 +35,22 @@ docker run -itd -p 8080:3000 calculator
 应用启动后的状态如上图。
 
 ## Smartide 本地运行
-1. Mac安装smartide
+1. 安装smartide
+
+​        Windows安装
+
+```shell
+https://smartidedl.blob.core.chinacloudapi.cn/releases/v0.2/smartide-win-20211916-9-x64.zip
+```
+
+​         Mac安装
 
 ```shell
 curl -sSL  https://smartidedl.blob.core.chinacloudapi.cn/releases/$(curl -L -s https://smartidedl.blob.core.chinacloudapi.cn/releases/stable-osx.txt) | tar -xzC /usr/local/bin/
 
 chmod +x /usr/local/bin/smartide
 ```
+
 
 2. 在boathouse-calculator目录运行 `smartide start` 命令启动开发容器，自动打开 http://localhost:3030
 ![](images/smartideweb.png)
@@ -52,6 +61,23 @@ chmod +x /usr/local/bin/smartide
    2. 运行项目，打开http://localhost:3031 ,设置断点调试
    ![](images/debug.png)
 
+
+
+## Visual Studio Code Remote Development
+环境准备：Visual Studio Code、安装插件：Remote Development
+![](images/vscoderemote.png)
+
+1. 新建SSH连接并保存到配置文件
+![](images/addssh.png)
+
+2. 打开SSH连接，中间需要多次输入密码
+![](images/open.png)
+
+3. 打开远程容器目录
+![](images/opendir.png)
+
+4. `npm i`安装依赖包，运行和调试
+![](images/debugcode.png)
 
 
 ## SonaQube 运行
