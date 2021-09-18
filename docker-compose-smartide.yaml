@@ -1,0 +1,18 @@
+version: "3.1"
+services:
+  smartideubuntussh:
+    image: registry.cn-hangzhou.aliyuncs.com/smartide/smartide-node:ubuntu
+    container_name: smartide-ubuntu-ssh
+    restart: always
+    environment:
+      ROOT_PASSWORD: root123
+      TZ: Asia/Shanghai
+    ports:
+      - "3022:22"
+    volumes:
+      - .:/home/project
+    networks:
+      - networks-smartide-ubuntu-ssh
+
+networks:
+  networks-smartide-ubuntu-ssh:

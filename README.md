@@ -64,7 +64,16 @@ chmod +x /usr/local/bin/smartide
 
 
 ## Visual Studio Code Remote Development
+
 环境准备：Visual Studio Code、安装插件：Remote Development
+
+**说明：** 当前对VSCode Remote SSH的支持还没有集成到 smartide cli，中，请通过以下命令手工启动 smartide开发容器 并按照后续配置使用VSCode Remote SSH 进入容器进行开发调试。
+
+```shell
+cd boathouse-calculator
+docker-compose -f docker-compose-smartide.yaml up
+```
+
 ![](images/vscoderemote.png)
 
 1. 新建SSH连接并保存到配置文件
