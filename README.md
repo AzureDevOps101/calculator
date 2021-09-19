@@ -53,6 +53,13 @@ chmod +x /usr/local/bin/smartide
 
 
 2. 在boathouse-calculator目录运行 `smartide start` 命令启动开发容器，自动打开 http://localhost:3030
+
+```shell
+git clone https://github.com/idcf-boat-house/boathouse-calculator.git
+cd boathouse-calculator
+smartide start
+```
+
 ![](images/smartideweb.png)
 
 3. 运行和调试
