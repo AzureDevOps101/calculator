@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: boathouse-calculator
+  namespace: #{K8S_NAMESPACE}#
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: boathouse-calculator
@@ -21,7 +22,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: boathouse-calculator
-        image: {acr-address}/calculator:latest
+        image: #{REGISTRY_URL}#/#{REGISTRY_NS}#/boathouse-calculator:latest
         ports:
         - containerPort: 3000
         resources:
@@ -37,6 +38,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: boathouse-calculator
+  namespace: #{K8S_NAMESPACE}#
 spec:
   type: LoadBalancer
   ports:

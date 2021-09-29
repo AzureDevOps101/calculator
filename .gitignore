@@ -2,3 +2,5 @@
 node_modules/
 out/
 *.zip
+.scannerwork
+.DS_Store

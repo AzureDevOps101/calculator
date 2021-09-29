@@ -1,0 +1,6 @@
+version: "2.1"
+services:
+    web:
+        image: #{REGISTRY_URL}#/#{REGISTRY_NS}#/boathouse-calculator:latest
+        ports:
+            - "3006:3000"

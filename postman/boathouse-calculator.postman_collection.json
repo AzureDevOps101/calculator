@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "0d9aaab8-67b0-4412-ad91-23ad7f1bb065",
+		"name": "boathouse-calculator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "adds two positive integers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Should reture 42\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result).to.eql('42');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/arithmetic?operation=add&operand1=21&operand2=21",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"arithmetic"
+					],
+					"query": [
+						{
+							"key": "operation",
+							"value": "add"
+						},
+						{
+							"key": "operand1",
+							"value": "21"
+						},
+						{
+							"key": "operand2",
+							"value": "21"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "adds zero to an integer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code should be 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"/*",
+							"pm.test(\"Expected Status code is 200\", () => {",
+							"    pm.expect(pm.response.code).to.eql(200);",
+							"});",
+							"*/",
+							"",
+							"pm.test(\"Expected result should be 42\", ()=>{",
+							"    const reponseJson = pm.response.json();",
+							"    pm.expect(reponseJson.result).to.eql(42);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result).to.eql('420');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/arithmetic?operation=add&operand1=42&operand2=0",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"arithmetic"
+					],
+					"query": [
+						{
+							"key": "operation",
+							"value": "add"
+						},
+						{
+							"key": "operand1",
+							"value": "42"
+						},
+						{
+							"key": "operand2",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

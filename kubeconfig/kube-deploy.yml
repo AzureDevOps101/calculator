@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boathouse-calculator
+  labels:
+    app: boathouse-calculator
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: boathouse-calculator
+  template:
+    metadata:
+      labels:
+        app: boathouse-calculator
+    spec:
+      containers:
+        - name: boathouse-calculator
+          image: ups216/boathouse-calculator:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: boathouse-calculator
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3000
+  selector:
+    app: boathouse-calculator

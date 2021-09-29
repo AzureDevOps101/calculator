@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: ubuntu-latest
 
 steps:
 - task: NodeTool@0
@@ -27,12 +27,28 @@ steps:
     testResultsFiles: '**/test-*.xml'
   condition: succeededOrFailed()
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerregistry'
+    repository: 'calculator'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: |
+      $(Build.BuildId)
+      latest
+
 - task: ArchiveFiles@2
   displayName: 'Archive $(Build.SourcesDirectory)'
   inputs:
     rootFolderOrFile: '$(Build.SourcesDirectory)'
     includeRootFolder: false
     archiveFile: '$(Build.ArtifactStagingDirectory)/Calculator-$(Build.BuildId).zip'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: '*.yaml'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
