@@ -40,6 +40,6 @@ argocd app get guestbook
 ## Create boathouse-calcualtor
 
 ```shell
-argocd app create boathouse-calculator --repo https://github.com/idcf-boat-house/boathouse-calculator.git --path kubeconfig --revision tid --dest-server https://kubernetes.default.svc --dest-namespace default
+argocd app create boathouse-calculator --repo https://github.com/idcf-boat-house/boathouse-calculator.git --path kubeconfig --revision kaikeba --dest-server https://kubernetes.default.svc --dest-namespace default
 argocd app get boathouse-calculator
 ```
