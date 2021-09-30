@@ -37,20 +37,7 @@ docker run -itd -p 8080:3000 calculator
 ## Smartide 本地运行
 1. 安装smartide
 
-​        Windows安装
-
-```shell
-https://smartidedl.blob.core.chinacloudapi.cn/releases/v0.2/smartide-win-20211916-9-x64.zip
-```
-
-​         Mac安装
-
-```shell
-curl -sSL  https://smartidedl.blob.core.chinacloudapi.cn/releases/$(curl -L -s https://smartidedl.blob.core.chinacloudapi.cn/releases/stable-osx.txt) | tar -xzC /usr/local/bin/
-
-chmod +x /usr/local/bin/smartide
-```
-
+安装SmartIDE，参考链接: https://smartide.dev/zh/docs/getting-started/install/
 
 2. 在boathouse-calculator目录运行 `smartide start` 命令启动开发容器，自动打开 http://localhost:3030
 
