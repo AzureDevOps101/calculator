@@ -6,7 +6,7 @@
   workspace:
     dev-container:
       service-name: boathouse-calculator
-      webide-port: 3030
+      webide-port: 6800
     services:
   
       boathouse-calculator:
