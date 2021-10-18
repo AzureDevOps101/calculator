@@ -1,0 +1,27 @@
+
+  version: smartide/v0.2
+  orchestrator:
+    type: docker-compose
+    version: 3
+  workspace:
+    dev-container:
+      service-name: boathouse-calculator
+      webide-port: 6800
+    services:
+  
+      boathouse-calculator:
+        image: registry.cn-hangzhou.aliyuncs.com/smartide/smartide-opvscode:latest
+        restart: always
+        environment:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          ROOT_PASSWORD: root123
+        volumes:
+          - .:/home/project
+        expose:
+          - 3000
+        networks:
+          - smartide-network
+  
+    networks:
+      smartide-network:
+        external: true
