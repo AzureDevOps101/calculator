@@ -13,7 +13,7 @@
     services:
   
       boathouse-calculator:
-        image: registry.cn-hangzhou.aliyuncs.com/smartide/smartide-node-ubuntu:latest
+        image: registry.cn-hangzhou.aliyuncs.com/smartide/smartide-opvscode:latest
         restart: always
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust
