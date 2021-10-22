@@ -7,6 +7,9 @@
     dev-container:
       service-name: boathouse-calculator
       webide-port: 6800
+      volumes: 
+        git-config: true
+        ssh-key: true
     services:
   
       boathouse-calculator:
