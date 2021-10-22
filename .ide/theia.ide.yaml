@@ -7,13 +7,10 @@
     dev-container:
       service-name: boathouse-calculator
       webide-port: 6800
-      volumes: 
-        git-config: true
-        ssh-key: true
     services:
   
       boathouse-calculator:
-        image: registry.cn-hangzhou.aliyuncs.com/smartide/smartide-opvscode:latest
+        image: registry.cn-hangzhou.aliyuncs.com/smartide/smartide-node:latest
         restart: always
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust
@@ -22,8 +19,6 @@
           - .:/home/project
         expose:
           - 3000
-        ports:
-          - 3001:3001
         networks:
           - smartide-network
   
