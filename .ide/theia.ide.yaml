@@ -3,11 +3,11 @@
   orchestrator:
     type: docker-compose
     version: 3
-    ide-type: theia  #vscode/theia
   workspace:
     dev-container:
       service-name: boathouse-calculator
       webide-port: 6800
+      ide-type: theia  #vscode/theia
       volumes: 
         git-config: true
         ssh-key: true
