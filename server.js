@@ -34,6 +34,7 @@ server.on('listening', onListening);
 
 console.log("Server running on port " + port);
 console.log("Editing in smartide ...");
+console.log("Smoke Test 2021.10.28");
 
 /**
  * Normalize a port into a number, string, or false.
