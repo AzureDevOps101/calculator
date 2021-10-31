@@ -9,13 +9,9 @@ services:
     - smartide-network
     ports:
     - 3001:3001
-    - 7000:3000
-    - "7022:22"
     restart: always
     volumes:
     - .:/home/project
-    - $HOME/.ssh:/root/.ssh
-    - /Users/jasonchen/.gitconfig:/root/.gitconfig
 networks:
   smartide-network:
     external: true
