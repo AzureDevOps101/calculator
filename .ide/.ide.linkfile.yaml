@@ -1,0 +1,13 @@
+version: smartide/v0.2
+ orchestrator:
+   type: docker-compose
+   version: 3
+workspace:
+  dev-container:
+     service-name: boathouse-calculator
+     webide-port: 6800
+     ide-type: vscode  #vscode/theia
+     volumes: 
+       git-config: true
+       ssh-key: true
+  docker-compose-file: ../docker-compose.yaml  # 链接的docker-compose文件的相对路径
