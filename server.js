@@ -38,6 +38,7 @@ console.log("Smoke Test 2021.10.28");
 console.log("Smoke test windows 2021.10.29");
 console.log("Smoke MacOS 2021.10.29");
 console.log("Smoke Test v0.1.2.845");
+console.log("Smoke Test windows 856");
 
 /**
  * Normalize a port into a number, string, or false.
