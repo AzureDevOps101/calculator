@@ -11,4 +11,4 @@ workspace:
     volumes: 
       git-config: true
       ssh-key: true
-  docker-compose-file: ../docker-compose.yaml  # 链接的docker-compose文件的相对路径
+  docker-compose-file: docker-compose.yaml  # 链接的docker-compose文件的相对路径
