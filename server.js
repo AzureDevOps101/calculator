@@ -43,7 +43,7 @@ console.log("Smoke Test Windows 860");
 console.log("Smoke Test Windows 860 - VM");
 console.log("Smoke test 866 VM");
 console.log("Smoke Test Windows 860 - VM + 1");
-console.log("Smoke test Windows 866 VM");
+console.log("Smoke test Windows 866 VM + 1");
 
 /**
  * Normalize a port into a number, string, or false.
